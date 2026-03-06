@@ -1,0 +1,1 @@
+int size = sizeof(prices)/sizeof(prices[0]);
