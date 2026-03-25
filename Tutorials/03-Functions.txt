@@ -1,0 +1,576 @@
+================================================================================
+TUTORIAL 3: FUNCTIONS
+Learning to Organize and Reuse Code in C++
+================================================================================
+
+WHAT YOU'LL LEARN:
+- What functions are and why they matter
+- Declaring and defining functions
+- Function parameters and arguments
+- Return values and return types
+- Function scope and variable visibility
+- Practical function patterns
+
+================================================================================
+SECTION 1: WHAT ARE FUNCTIONS?
+================================================================================
+
+A FUNCTION is a reusable block of code that performs a specific task.
+
+WHY USE FUNCTIONS?
+  1. REUSABILITY: Write code once, use it many times
+  2. ORGANIZATION: Break big problems into smaller pieces
+  3. READABILITY: Code is easier to understand
+  4. MAINTENANCE: Fix bugs in one place, everywhere is fixed
+
+ANALOGY: Think of a function like a recipe:
+  - The recipe name is like the function name
+  - The ingredients are like parameters
+  - The steps are the function body
+  - The finished dish is like the return value
+
+REAL WORLD EXAMPLE:
+Instead of calculating area like this in multiple places:
+  int area = 5 * 5;
+  int area = 10 * 10;
+  int area = 3 * 3;
+
+Create a function once:
+  int calculateSquareArea(int side) {
+    return side * side;
+  }
+
+Then use it everywhere:
+  int area1 = calculateSquareArea(5);    // 25
+  int area2 = calculateSquareArea(10);   // 100
+  int area3 = calculateSquareArea(3);    // 9
+
+================================================================================
+SECTION 2: FUNCTION BASICS
+================================================================================
+
+2.1 FUNCTION DEFINITION
+------------------------
+
+A function definition tells C++ what the function does.
+
+FORMAT:
+  returnType functionName(parameters) {
+    // Body: the code that runs when function is called
+    return value;  // Send result back (if returnType is not void)
+  }
+
+COMPONENTS:
+  returnType:    What type of value the function gives back (int, void, etc.)
+  functionName:  The name you choose for the function
+  parameters:    Input values the function needs (can be empty)
+  body:          The code inside the { }
+  return:        Sends a value back to whoever called the function
+
+Example 1 (Function with return value):
+  int add(int a, int b) {
+    int sum = a + b;
+    return sum;
+  }
+
+This function:
+  - Takes two int parameters (a and b)
+  - Adds them together
+  - Returns the result as an int
+
+Example 2 (Function with no parameters):
+  void sayHello() {
+    cout << "Hello, World!\n";
+  }
+
+This function:
+  - Takes no parameters
+  - Prints a message
+  - Returns nothing (void means no return value)
+
+Example 3 (Function with parameters, no return):
+  void printName(string name) {
+    cout << "Hello, " << name << "!\n";
+  }
+
+This function:
+  - Takes one string parameter (name)
+  - Prints a greeting
+  - Returns nothing (void)
+
+2.2 FUNCTION DECLARATION (PROTOTYPE)
+-------------------------------------
+
+Before you can USE a function, C++ needs to KNOW about it first. 
+
+You can either:
+  1. Define it BEFORE main() (full definition)
+  2. DECLARE it before main(), DEFINE it after
+
+DECLARATION (also called PROTOTYPE):
+A declaration tells C++: "This function exists, I'll use it later."
+
+FORMAT:
+  returnType functionName(parameters);
+
+Example:
+  // Declaration (prototype) - just the signature with semicolon
+  int add(int a, int b);
+  
+  int main() {
+    int result = add(5, 3);  // Can use it here
+    cout << result;
+    return 0;
+  }
+  
+  // Definition - the actual code, comes later
+  int add(int a, int b) {
+    return a + b;
+  }
+
+WHY DO THIS?
+  - Lets you define functions after main()
+  - Makes code cleaner (main() stays at top)
+  - Professional practice
+
+TYPICAL FILE STRUCTURE:
+  #include <iostream>
+  using std::cout;
+  
+  // Declarations (function prototypes)
+  int add(int a, int b);
+  void greet(string name);
+  
+  int main() {
+    // Use the functions here
+    cout << add(5, 3) << "\n";
+    greet("Alice");
+    return 0;
+  }
+  
+  // Definitions (actual code)
+  int add(int a, int b) {
+    return a + b;
+  }
+  
+  void greet(string name) {
+    cout << "Hello, " << name << "!\n";
+  }
+
+================================================================================
+SECTION 3: CALLING FUNCTIONS
+================================================================================
+
+Once a function exists, you can CALL (use) it by writing its name with 
+arguments.
+
+FORMAT:
+  functionName(arguments);
+
+Example:
+  int multiply(int x, int y) {
+    return x * y;
+  }
+  
+  int main() {
+    int result = multiply(4, 5);  // CALL the function with arguments 4 and 5
+    cout << result;                // Prints: 20
+    return 0;
+  }
+
+FUNCTION CALL FLOW:
+  1. multiply(4, 5) is called
+  2. Control jumps to the multiply function
+  3. x = 4, y = 5 (arguments assigned to parameters)
+  4. return x * y calculates 4 * 5 = 20
+  5. Control returns to main(), result = 20
+  6. Execution continues
+
+MULTIPLE CALLS:
+You can call the same function many times:
+  
+  int multiply(int x, int y) {
+    return x * y;
+  }
+  
+  int main() {
+    cout << multiply(2, 3) << "\n";   // Prints: 6
+    cout << multiply(4, 5) << "\n";   // Prints: 20
+    cout << multiply(10, 10) << "\n"; // Prints: 100
+    return 0;
+  }
+
+================================================================================
+SECTION 4: PARAMETERS AND ARGUMENTS
+================================================================================
+
+PARAMETERS: Variables in the function definition
+ARGUMENTS: Values you pass when calling the function
+
+Example:
+  // Here, x and y are PARAMETERS
+  int add(int x, int y) {
+    return x + y;
+  }
+  
+  int main() {
+    // Here, 5 and 3 are ARGUMENTS
+    int result = add(5, 3);
+    return 0;
+  }
+
+4.1 MULTIPLE PARAMETERS
+------------------------
+
+Functions can have many parameters:
+
+  float calculatePrice(float basePrice, float taxRate, int quantity) {
+    float totalTax = basePrice * quantity * taxRate;
+    return (basePrice * quantity) + totalTax;
+  }
+  
+  int main() {
+    float price = calculatePrice(10.0, 0.08, 5);
+    cout << price << "\n";  // Prints the total with tax
+    return 0;
+  }
+
+Parameters are separated by commas. They get values from arguments IN ORDER.
+
+4.2 DEFAULT PARAMETERS
+----------------------
+
+Give parameters default values they'll use if no argument is provided:
+
+  void greet(string name = "Friend", string greeting = "Hello") {
+    cout << greeting << ", " << name << "!\n";
+  }
+  
+  int main() {
+    greet("Alice", "Hi");        // Uses both arguments
+    greet("Bob");                // Uses default greeting
+    greet();                      // Uses both defaults
+    return 0;
+  }
+  
+  OUTPUT:
+  Hi, Alice!
+  Hello, Bob!
+  Hello, Friend!
+
+IMPORTANT: Parameters with defaults must come AFTER parameters without 
+defaults.
+
+WRONG:
+  void func(int a = 10, int b) { }  // ERROR!
+
+CORRECT:
+  void func(int a, int b = 10) { }  // OK
+
+================================================================================
+SECTION 5: RETURN VALUES
+================================================================================
+
+A function can return a value using the 'return' statement.
+
+5.1 RETURNING VALUES
+--------------------
+
+FORMAT:
+  return value;
+
+The value must match the returnType:
+
+  int getAge() {
+    return 25;              // Returns an int
+  }
+  
+  string getName() {
+    return "Alice";         // Returns a string
+  }
+  
+  bool isPositive(int num) {
+    return num > 0;         // Returns a bool
+  }
+
+CALLING AND USING RETURN VALUES:
+
+  int getAge() {
+    return 25;
+  }
+  
+  int main() {
+    int age = getAge();      // age = 25
+    cout << age << "\n";     // Prints: 25
+    cout << getAge() << "\n"; // Also works, prints: 25
+    return 0;
+  }
+
+5.2 EARLY RETURNS
+-----------------
+
+A function stops immediately when it hits 'return':
+
+  int absolute(int num) {
+    if (num < 0) {
+      return -num;  // Stop here and return if negative
+    }
+    return num;     // Otherwise return positive
+  }
+  
+  int main() {
+    cout << absolute(-5) << "\n";   // Prints: 5
+    cout << absolute(10) << "\n";   // Prints: 10
+    return 0;
+  }
+
+5.3 VOID (NO RETURN VALUE)
+---------------------------
+
+If a function doesn't return anything, use 'void':
+
+  void printStars(int count) {
+    for (int i = 0; i < count; i++) {
+      cout << "* ";
+    }
+    cout << "\n";
+  }
+  
+  int main() {
+    printStars(5);      // Prints: * * * * *
+    printStars(3);      // Prints: * * *
+    return 0;
+  }
+
+You can still use 'return;' in void functions to exit early:
+
+  void sayGoodbye(bool shouldLeave) {
+    cout << "I'm leaving...\n";
+    if (!shouldLeave) {
+      return;           // Exit early, skip the rest
+    }
+    cout << "Goodbye!\n";
+  }
+
+================================================================================
+SECTION 6: SCOPE
+================================================================================
+
+SCOPE: The region of code where a variable can be accessed.
+
+6.1 LOCAL SCOPE (Function Scope)
+---------------------------------
+
+Variables declared INSIDE a function only exist in that function:
+
+  void example() {
+    int localVar = 10;    // This variable only exists inside example()
+    cout << localVar;
+  }
+  
+  int main() {
+    cout << localVar;     // ERROR! localVar doesn't exist here
+    return 0;
+  }
+
+Another example:
+  void printDouble(int num) {
+    cout << num * 2 << "\n";
+  }
+  
+  int main() {
+    int x = 5;
+    printDouble(x);       // OK: passing x to the function
+    cout << num << "\n";  // ERROR: num only exists inside printDouble
+    return 0;
+  }
+
+6.2 GLOBAL SCOPE
+----------------
+
+Variables declared OUTSIDE all functions exist everywhere:
+
+  #include <iostream>
+  using std::cout;
+  
+  int globalVar = 100;    // Global - exists everywhere
+  
+  void printGlobal() {
+    cout << globalVar << "\n";  // Can access global here
+  }
+  
+  int main() {
+    cout << globalVar << "\n";  // Can access global here too
+    printGlobal();
+    return 0;
+  }
+
+AVOID GLOBALS in general. They make code confusing.
+
+6.3 PARAMETERS HIDE GLOBALS
+-----
+
+If a parameter has the same name as a global variable, the parameter "hides" 
+it inside the function:
+
+  int x = 100;  // Global
+  
+  void example(int x) {    // Parameter x hides global x
+    cout << x << "\n";     // Prints the parameter (5), not global (100)
+  }
+  
+  int main() {
+    example(5);            // Parameter x = 5
+    return 0;
+  }
+
+================================================================================
+SECTION 7: FUNCTION OVERLOADING
+================================================================================
+
+You can have multiple functions with the SAME NAME if they have DIFFERENT 
+PARAMETERS.
+
+C++ knows which one to call based on the arguments you provide.
+
+Example:
+  // Version 1: Takes two ints
+  int add(int a, int b) {
+    return a + b;
+  }
+  
+  // Version 2: Takes two doubles
+  double add(double a, double b) {
+    return a + b;
+  }
+  
+  // Version 3: Takes three ints
+  int add(int a, int b, int c) {
+    return a + b + c;
+  }
+  
+  int main() {
+    cout << add(5, 3) << "\n";           // Calls version 1 (int, int)
+    cout << add(5.5, 3.2) << "\n";       // Calls version 2 (double, double)
+    cout << add(5, 3, 2) << "\n";        // Calls version 3 (int, int, int)
+    return 0;
+  }
+
+How C++ decides:
+  1. Looks at the number of arguments
+  2. Looks at the types of arguments
+  3. Calls the matching function
+
+================================================================================
+SECTION 8: PRACTICAL COMPLETE EXAMPLE
+================================================================================
+
+A program using multiple functions:
+
+  #include <iostream>
+  #include <string>
+  using std::cout;
+  using std::cin;
+  using std::string;
+  
+  // Function declarations
+  double celsiusToFahrenheit(double celsius);
+  void printTemperatureInfo(double celsius);
+  bool isFreezingPoint(double celsius);
+  
+  int main() {
+    double temp = -5;
+    
+    cout << "Temperature Analysis\n";
+    cout << "====================\n";
+    printTemperatureInfo(temp);
+    
+    cout << "\nEnter a temperature in Celsius: ";
+    cin >> temp;
+    printTemperatureInfo(temp);
+    
+    return 0;
+  }
+  
+  // Function definitions
+  double celsiusToFahrenheit(double celsius) {
+    return (celsius * 9/5) + 32;
+  }
+  
+  void printTemperatureInfo(double celsius) {
+    double fahrenheit = celsiusToFahrenheit(celsius);
+    
+    cout << "Celsius: " << celsius << "°C\n";
+    cout << "Fahrenheit: " << fahrenheit << "°F\n";
+    
+    if (isFreezingPoint(celsius)) {
+      cout << "Water freezes at this temperature!\n";
+    } else if (celsius < 0) {
+      cout << "This is below freezing.\n";
+    } else {
+      cout << "This is above freezing.\n";
+    }
+  }
+  
+  bool isFreezingPoint(double celsius) {
+    return celsius == 0;
+  }
+
+================================================================================
+SECTION 9: EXERCISES - PRACTICE YOURSELF
+================================================================================
+
+EXERCISE 1: Math Functions
+  Create functions for:
+  - square(int x): returns x squared
+  - cube(int x): returns x cubed
+  - absolute(int x): returns absolute value
+  
+  Test them in main()
+
+EXERCISE 2: String Functions
+  Create a function that:
+  - Takes a name as a string
+  - Returns the name repeated 3 times
+  Example: repeatName("Bob") returns "BobBobBob"
+
+EXERCISE 3: Distance Calculator
+  Create a function calculateDistance that takes:
+  - x1, y1 (first point)
+  - x2, y2 (second point)
+  Returns the distance using: sqrt((x2-x1)² + (y2-y1)²)
+  
+  (You'll need #include <cmath> for sqrt())
+
+EXERCISE 4: Calculator with Functions
+  Create functions for:
+  - add(a, b)
+  - subtract(a, b)
+  - multiply(a, b)
+  - divide(a, b)
+  
+  Create a menu-driven program that lets users choose operations.
+
+SUGGESTED PRACTICE: Look at these code examples in the /C/ folder:
+  - p26simplefunction.cpp (basic function example)
+  - p27returns.cpp (return value examples)
+  - p29overloadfunc.cpp (function overloading)
+  - p30vscope.cpp (variable scope examples)
+
+================================================================================
+SECTION 10: KEY TAKEAWAYS
+================================================================================
+
+✓ Functions break code into reusable, organized pieces
+✓ Define a function with returnType, name, parameters, and body
+✓ Declare functions before using them (prototypes)
+✓ Call functions with arguments that match parameters
+✓ Return values send data back to the caller
+✓ Use 'void' for functions that don't return anything
+✓ Local variables exist only inside their function
+✓ Parameters create local variables
+✓ Function overloading: same name, different parameters
+
+NEXT TOPIC: Arrays and Vectors - Learn to store collections of data!
+
+================================================================================

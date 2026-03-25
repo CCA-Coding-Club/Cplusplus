@@ -1,0 +1,751 @@
+================================================================================
+TUTORIAL 6: CLASSES AND OBJECT-ORIENTED PROGRAMMING
+Building Reusable, Organized Code in C++
+================================================================================
+
+WHAT YOU'LL LEARN:
+- What classes and objects are
+- Member variables (properties) and member functions (methods)
+- Access modifiers (public, private)
+- Constructors and destructors
+- Inheritance (is-a relationships)
+- Encapsulation and abstraction
+- Real-world OOP design patterns
+
+================================================================================
+SECTION 1: INTRODUCTION TO CLASSES
+================================================================================
+
+A CLASS is a blueprint for creating OBJECTS.
+
+An OBJECT is an instance (specific copy) of a class.
+
+ANALOGY:
+  - A blueprint is a CLASS
+  - A house built from it is an OBJECT
+  
+  - A recipe is a CLASS
+  - A cake made from it is an OBJECT
+  
+  - A cookie cutter is a CLASS
+  - A cookie made from it is an OBJECT
+
+WHY USE CLASSES?
+  1. ORGANIZE data and functions together
+  2. CREATE multiple similar objects easily
+  3. BUNDLE related behavior with related data
+  4. BUILD complex systems from simple pieces
+
+WITHOUT CLASSES (Procedural approach):
+
+  // Messy: data scattered everywhere
+  string name1 = "Alice";
+  int age1 = 25;
+  float gpa1 = 3.5;
+  
+  string name2 = "Bob";
+  int age2 = 22;
+  float gpa2 = 3.8;
+  
+  // Hard to manage
+
+WITH CLASSES (Object-oriented approach):
+
+  class Student {
+    public:
+      string name;
+      int age;
+      float gpa;
+  };
+  
+  Student s1;
+  s1.name = "Alice";
+  s1.age = 25;
+  s1.gpa = 3.5;
+  
+  Student s2;
+  s2.name = "Bob";
+  s2.age = 22;
+  s2.gpa = 3.8;
+  
+  // Much cleaner!
+
+================================================================================
+SECTION 2: DEFINING AND USING CLASSES
+================================================================================
+
+2.1 CLASS DEFINITION
+--------------------
+
+FORMAT:
+
+  class ClassName {
+    public:
+      // Public members (accessible from outside)
+      dataType memberVariable;
+      
+      void memberFunction() {
+        // Code here
+      }
+  };
+
+Example (Simple Person class):
+
+  class Person {
+    public:
+      string name;
+      int age;
+      
+      void introduce() {
+        cout << "Hello, I'm " << name << " and I'm " << age << ".\n";
+      }
+  };
+
+2.2 CREATING OBJECTS
+--------------------
+
+Once you define a class, create objects (instances):
+
+  Person p1;          // Create object p1 of type Person
+  Person p2;          // Create object p2 of type Person
+
+2.3 ACCESSING MEMBERS
+---------------------
+
+Use the DOT (.) operator to access object members:
+
+  Person p1;
+  
+  p1.name = "Alice";        // Access member variable
+  p1.age = 25;
+  
+  p1.introduce();           // Call member function
+  
+OUTPUT: Hello, I'm Alice and I'm 25.
+
+Full example:
+
+  class Dog {
+    public:
+      string name;
+      string breed;
+      
+      void bark() {
+        cout << name << " says: Woof!\n";
+      }
+  };
+  
+  int main() {
+    Dog myDog;
+    myDog.name = "Buddy";
+    myDog.breed = "Golden Retriever";
+    myDog.bark();        // Prints: Buddy says: Woof!
+    
+    Dog otherDog;
+    otherDog.name = "Max";
+    otherDog.breed = "Labrador";
+    otherDog.bark();     // Prints: Max says: Woof!
+    
+    return 0;
+  }
+
+================================================================================
+SECTION 3: MEMBER FUNCTIONS (METHODS)
+================================================================================
+
+Member functions are functions that belong to a class.
+
+DECLARING MEMBER FUNCTIONS IN CLASS:
+
+  class BankAccount {
+    public:
+      float balance;
+      
+      void deposit(float amount) {
+        balance += amount;
+      }
+      
+      void withdraw(float amount) {
+        balance -= amount;
+      }
+      
+      void printBalance() {
+        cout << "Balance: $" << balance << "\n";
+      }
+  };
+
+Using member functions:
+
+  BankAccount account;
+  account.balance = 100;
+  
+  account.deposit(50);           // Now balance is 150
+  account.withdraw(30);          // Now balance is 120
+  account.printBalance();        // Prints: Balance: $120
+
+MEMBER FUNCTIONS CAN USE MEMBER VARIABLES:
+
+All member functions can access the object's member variables:
+
+  class Rectangle {
+    public:
+      float width;
+      float height;
+      
+      float area() {
+        return width * height;   // Use member variables directly
+      }
+      
+      float perimeter() {
+        return 2 * (width + height);
+      }
+  };
+  
+  int main() {
+    Rectangle rect;
+    rect.width = 5;
+    rect.height = 3;
+    
+    cout << "Area: " << rect.area() << "\n";        // 15
+    cout << "Perimeter: " << rect.perimeter() << "\n"; // 16
+    
+    return 0;
+  }
+
+================================================================================
+SECTION 4: CONSTRUCTORS
+================================================================================
+
+A CONSTRUCTOR is a special function that runs when an object is created.
+
+Use it to INITIALIZE member variables automatically.
+
+4.1 DEFINING CONSTRUCTORS
+--------------------------
+
+NAME THE FUNCTION EXACTLY LIKE THE CLASS:
+
+FORMAT:
+  class ClassName {
+    public:
+      ClassName() {        // Constructor (same name as class)
+        // Initialize members here
+      }
+  };
+
+Example (Constructor without parameters):
+
+  class Car {
+    public:
+      string color;
+      string brand;
+      
+      Car() {              // Constructor
+        color = "Unknown";
+        brand = "Unknown";
+      }
+  };
+  
+  int main() {
+    Car myCar;             // Constructor runs automatically
+    cout << myCar.color << "\n";  // Prints: Unknown
+    return 0;
+  }
+
+4.2 CONSTRUCTORS WITH PARAMETERS
+---------------------------------
+
+Give the constructor parameters for initialization:
+
+  class Car {
+    public:
+      string color;
+      string brand;
+      
+      Car(string c, string b) {   // Constructor with parameters
+        color = c;
+        brand = b;
+      }
+  };
+  
+  int main() {
+    Car myCar("Red", "Toyota");   // Pass values to constructor
+    cout << myCar.color << "\n";  // Prints: Red
+    cout << myCar.brand << "\n";  // Prints: Toyota
+    return 0;
+  }
+
+4.3 DEFAULT CONSTRUCTOR
+------------------------
+
+C++ provides a default (empty) constructor automatically. If you define your 
+own, it overrides the default.
+
+If you want BOTH a default and a parameterized constructor:
+
+  class Person {
+    public:
+      string name;
+      int age;
+      
+      Person() {                 // Default constructor
+        name = "Unknown";
+        age = 0;
+      }
+      
+      Person(string n, int a) {  // Parameterized constructor
+        name = n;
+        age = a;
+      }
+  };
+  
+  int main() {
+    Person p1;                   // Uses default constructor
+    Person p2("Alice", 25);      // Uses parameterized constructor
+    
+    cout << p1.name << "\n";     // Prints: Unknown
+    cout << p2.name << "\n";     // Prints: Alice
+    return 0;
+  }
+
+================================================================================
+SECTION 5: ACCESS MODIFIERS (PUBLIC and PRIVATE)
+================================================================================
+
+Access modifiers control WHO can access members.
+
+5.1 PUBLIC
+----------
+
+PUBLIC members are accessible from ANYWHERE:
+
+  class Person {
+    public:
+      string name;              // Anyone can access/change
+      void greet() {             // Anyone can call
+        cout << "Hello, I'm " << name << ".\n";
+      }
+  };
+  
+  int main() {
+    Person p;
+    p.name = "Alice";          // OK: public member
+    p.greet();                 // OK: public function
+    return 0;
+  }
+
+5.2 PRIVATE
+-----------
+
+PRIVATE members are accessible ONLY FROM WITHIN THE CLASS:
+
+  class BankAccount {
+    private:
+      float balance;           // Only functions INSIDE BankAccount can access
+    
+    public:
+      void deposit(float amount) {
+        balance += amount;     // OK: inside the class
+      }
+      
+      void printBalance() {
+        cout << balance << "\n"; // OK: inside the class
+      }
+  };
+  
+  int main() {
+    BankAccount account;
+    account.deposit(100);      // OK: public function
+    account.printBalance();    // OK: public function
+    
+    account.balance = 50;      // ERROR! balance is private
+    return 0;
+  }
+
+5.3 WHY USE PRIVATE?
+--------------------
+
+ENCAPSULATION: Hide internal details, force proper use.
+
+Example:
+
+  class Temperature {
+    private:
+      float celsius;           // Hide it
+    
+    public:
+      Temperature(float c) {
+        setCelsius(c);         // Validate through function
+      }
+      
+      void setCelsius(float c) {
+        if (c < -273.15) {     // Validate: can't be below absolute zero
+          cout << "Invalid temperature!\n";
+        } else {
+          celsius = c;
+        }
+      }
+      
+      float getCelsius() {
+        return celsius;
+      }
+  };
+
+Without private, user could:
+  temp.celsius = -500;    // Invalid! Below absolute zero
+
+With private, user must:
+  temp.setCelsius(-500);  // Validation prevents this
+
+PRINCIPLE: Keep data PRIVATE, provide public FUNCTIONS to access it safely.
+
+================================================================================
+SECTION 6: INHERITANCE (Building Hierarchies)
+================================================================================
+
+INHERITANCE lets a class EXTEND another class (is-a relationship).
+
+6.1 BASE CLASS AND DERIVED CLASS
+--------------------------------
+
+BASE CLASS: The original class being inherited from
+DERIVED CLASS: A new class that inherits from the base
+
+SYNTAX:
+  class DerivedClass : public BaseClass {
+  };
+
+Example (Animals):
+
+  class Animal {           // BASE CLASS
+    public:
+      string name;
+      
+      void eat() {
+        cout << name << " is eating.\n";
+      }
+  };
+  
+  class Dog : public Animal {    // DERIVED CLASS
+    public:
+      void bark() {
+        cout << name << " says: Woof!\n";
+      }
+  };
+  
+  int main() {
+    Dog myDog;
+    myDog.name = "Buddy";
+    
+    myDog.eat();    // From Animal class
+    myDog.bark();   // From Dog class
+    
+    // Prints:
+    // Buddy is eating.
+    // Buddy says: Woof!
+    
+    return 0;
+  }
+
+Dog inherits ALL public members from Animal. Dog is an Animal!
+
+6.2 OVERRIDING FUNCTIONS
+------------------------
+
+A derived class can redefine (override) a base class function:
+
+  class Animal {
+    public:
+      void speak() {
+        cout << "Some generic sound.\n";
+      }
+  };
+  
+  class Dog : public Animal {
+    public:
+      void speak() {           // Override Animal's speak()
+        cout << "Woof!\n";
+      }
+  };
+  
+  class Cat : public Animal {
+    public:
+      void speak() {           // Override Animal's speak()
+        cout << "Meow!\n";
+      }
+  };
+  
+  int main() {
+    Dog dog;
+    dog.speak();     // Prints: Woof!
+    
+    Cat cat;
+    cat.speak();     // Prints: Meow!
+    
+    return 0;
+  }
+
+6.3 INHERITANCE HIERARCHY
+--------------------------
+
+Classes can inherit from other derived classes:
+
+  class Animal { };                  // Base
+  class Mammal : public Animal { };  // Inherits from Animal
+  class Dog : public Mammal { };     // Inherits from Mammal
+
+Dog inherits from Mammal, which inherits from Animal. Dog has all features 
+of both.
+
+================================================================================
+SECTION 7: DESTRUCTORS
+================================================================================
+
+A DESTRUCTOR runs when an object is destroyed (cleaned up).
+
+Use it to FREE RESOURCES (memory, files, etc.).
+
+7.1 DEFINING DESTRUCTORS
+------------------------
+
+NAME: ~ClassName (tilde followed by class name)
+
+  class Person {
+    public:
+      string name;
+      
+      Person(string n) {           // Constructor
+        name = n;
+        cout << name << " created.\n";
+      }
+      
+      ~Person() {                  // Destructor
+        cout << name << " destroyed.\n";
+      }
+  };
+  
+  int main() {
+    Person p("Alice");             // Constructor runs
+    cout << "Program ending.\n";
+    return 0;                      // Destructor runs when p is destroyed
+  }
+  
+  OUTPUT:
+  Alice created.
+  Program ending.
+  Alice destroyed.
+
+7.2 DESTRUCTORS FOR CLEANUP
+---------------------------
+
+Free dynamically allocated memory:
+
+  class StringHolder {
+    private:
+      char* str;
+    
+    public:
+      StringHolder(const char* s) {
+        str = new char[50];          // Allocate memory
+        strcpy(str, s);              // Copy string
+      }
+      
+      ~StringHolder() {
+        delete[] str;                // Free memory in destructor
+        str = nullptr;
+      }
+  };
+
+When object is destroyed, destructor automatically frees the memory.
+
+================================================================================
+SECTION 8: PRACTICAL OOP EXAMPLE - THE CHESS PROJECT
+================================================================================
+
+This repo has a Chess project in /Projects/Chess/ that demonstrates OOP!
+
+KEY CLASSES IN THE CHESS PROJECT:
+
+1. **Pieces** class - Represents chess pieces (pawns, knights, bishops, etc.)
+   - Member variables: type, color, position
+   - Methods: canMove(), move()
+   - Inheritance: Piece class with subclasses for each piece type
+
+2. **Board** class - Represents the chess board
+   - Member variables: 8x8 array of squares, pieces
+   - Methods: InitializeBoard(), MovePiece(), IsValidMove()
+   - Private methods: internal board management
+
+3. **Position** class - Represents a square on the board (row, col)
+   - Member variables: row, column
+   - Methods: isOnBoard(), equals()
+
+4. **MoveValidator** class - Validates chess moves
+   - Methods: IsValidPawnMove(), IsValidKnightMove(), etc.
+   - Checks if moves follow chess rules
+
+5. **GameManager** class - Controls the game
+   - Member variables: board, current player, game state
+   - Methods: Run(), ProcessMove(), CheckWin()
+   - Uses all other classes to manage the game
+
+DESIGN PATTERN: These classes INTERACT:
+  - GameManager uses Board
+  - Board contains Pieces
+  - MoveValidator checks moves
+  - Position tracks locations
+
+This is REAL OOP - multiple classes working together to build a complex system!
+
+STUDY THE CHESS PROJECT:
+Look at the files in /Projects/Chess/ to see:
+  - How classes are declared (in .h files)
+  - How they're implemented (in .cpp files)
+  - How they work together
+  - Real encapsulation with private/public
+
+================================================================================
+SECTION 9: COMPLETE OOP EXAMPLE
+================================================================================
+
+A complete program showing OOP concepts:
+
+  #include <iostream>
+  using std::cout;
+  using std::string;
+  
+  class BankAccount {
+    private:
+      float balance;
+      string accountOwner;
+    
+    public:
+      BankAccount(string owner, float initialBalance) {
+        accountOwner = owner;
+        balance = initialBalance;
+        cout << "Account created for " << accountOwner << ".\n";
+      }
+      
+      ~BankAccount() {
+        cout << "Account closed for " << accountOwner << ".\n";
+      }
+      
+      void deposit(float amount) {
+        if (amount > 0) {
+          balance += amount;
+          cout << accountOwner << " deposited $" << amount << ".\n";
+        }
+      }
+      
+      void withdraw(float amount) {
+        if (amount > 0 && amount <= balance) {
+          balance -= amount;
+          cout << accountOwner << " withdrew $" << amount << ".\n";
+        } else {
+          cout << "Insufficient funds.\n";
+        }
+      }
+      
+      float getBalance() {
+        return balance;
+      }
+  };
+  
+  int main() {
+    BankAccount account("Alice", 1000);
+    
+    account.deposit(500);
+    cout << "Balance: $" << account.getBalance() << "\n";
+    
+    account.withdraw(200);
+    cout << "Balance: $" << account.getBalance() << "\n";
+    
+    return 0;
+  }
+  
+  OUTPUT:
+  Account created for Alice.
+  Alice deposited $500.
+  Balance: $1500
+  Alice withdrew $200.
+  Balance: $1300
+  Account closed for Alice.
+
+================================================================================
+SECTION 10: EXERCISES - PRACTICE YOURSELF
+================================================================================
+
+EXERCISE 1: Book Class
+  Create a Book class with:
+  - Member variables: title, author, pages, year
+  - Constructor taking all parameters
+  - Member function: printInfo() that displays book information
+  - Create 3 Book objects and call printInfo()
+
+EXERCISE 2: Circle Class
+  Create a Circle class with:
+  - Member variable: radius (private)
+  - Constructor taking radius
+  - Member functions: getArea(), getCircumference()
+  - Validation in constructor: reject negative radius
+
+EXERCISE 3: Inheritance - Vehicle Example
+  Create a Vehicle base class with:
+  - Member variables: color, speed
+  - Method: drive()
+  
+  Create Car and Motorcycle classes that inherit from Vehicle
+  Override drive() in each (different messages)
+
+EXERCISE 4: Student Class (Complex)
+  Create a Student class with:
+  - Private member variables: name, ID, GPA
+  - Constructor with parameters
+  - Public methods: addGrade(float), getCurrentGPA(), printInfo()
+  - Keep grades in a vector
+
+SUGGESTED STUDY: Look at the Chess project:
+  - Read Board.h and Pieces.h to see class design
+  - Look at GameManager.cpp to see how classes work together
+  - Trace how a move gets validated through multiple classes
+
+================================================================================
+SECTION 11: KEY TAKEAWAYS
+================================================================================
+
+✓ Classes are blueprints; objects are instances
+✓ Member variables store data; member functions perform actions
+✓ Constructors initialize objects automatically
+✓ Destructors clean up when objects are destroyed
+✓ Access modifiers: public (accessible everywhere), private (class only)
+✓ Use private for data, public for interface
+✓ Inheritance: derived classes extend base classes
+✓ Override functions to customize derived class behavior
+✓ Encapsulation: hide internal details, expose safe interface
+✓ Design classes to work together (composition and inheritance)
+
+NEXT STEPS:
+
+You now know the fundamentals of C++:
+1. Data Types and Variables
+2. Control Flow
+3. Functions
+4. Arrays and Vectors
+5. Pointers and Memory
+6. Classes and OOP
+
+BUILD PROJECTS:
+- Expand the Chess game with new features
+- Create a text-based RPG game
+- Build a simple calculator, music player, or inventory system
+- Challenge yourself with real-world problems
+
+STUDY ADVANCED TOPICS:
+- Templates (generic programming)
+- Exception handling (error management)
+- STL Containers (set, map, deque)
+- File I/O (reading/writing files)
+
+YOU'RE READY TO CODE REAL APPLICATIONS!
+
+================================================================================
