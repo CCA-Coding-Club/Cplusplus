@@ -2,11 +2,11 @@
 
 Welcome! This is a comprehensive guide to learning C++ from scratch. Whether you're a complete beginner or looking to strengthen your foundational knowledge, you'll find practical tutorials, working code examples, and a reference wiki here.
 
-## 🎯 What's Inside
+## What's Inside
 
 This repository is organized to take you from **complete beginner to building real projects** in C++.
 
-### 📚 Learning Structure
+### Learning Structure
 
 ```
 Tutorials/          ← Start here! Comprehensive beginner-friendly guides
@@ -26,7 +26,7 @@ C/                  ← Practice code snippets organized by topic
 Projects/           ← Real-world example: Chess game built with C++
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### For Complete Beginners
 
@@ -35,37 +35,37 @@ Follow this learning path in order:
 1. **[Start: Data Types & Variables](Tutorials/01-DataTypes.txt)**
    - Learn what data types are and why they matter
    - Understand memory and storage
-   - 📖 Quick ref: [Wiki/QUICKREF_DataTypes.md](Wiki/QUICKREF_DataTypes.md)
+   - Quick ref: [QUICKREF_DataTypes](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_DataTypes)
 
 2. **[Control Flow (If/Else/Loops)](Tutorials/02-ControlFlow.txt)**
    - Master decision-making with if/else and switch
    - Learn all three types of loops
-   - 📖 Quick ref: [Wiki/QUICKREF_ControlFlow.md](Wiki/QUICKREF_ControlFlow.md)
-   - 💾 Examples: See `C/p11if.cpp`, `p12switch.cpp`, `p20for.cpp`, `p22nestedloops.cpp`
+   - Quick ref: [QUICKREF_ControlFlow](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_ControlFlow)
+   - Examples: See `C/p11if.cpp`, `p12switch.cpp`, `p20for.cpp`, `p22nestedloops.cpp`
 
 3. **[Functions](Tutorials/03-Functions.txt)**
    - Break code into reusable pieces
    - Understand parameters, returns, and scope
-   - 📖 Quick ref: [Wiki/QUICKREF_Functions.md](Wiki/QUICKREF_Functions.md)
-   - 💾 Examples: See `C/p26simplefunction.cpp`, `p27returns.cpp`, `p29overloadfunc.cpp`
+   - Quick ref: [QUICKREF_Functions](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_Functions)
+   - Examples: See `C/p26simplefunction.cpp`, `p27returns.cpp`, `p29overloadfunc.cpp`
 
 4. **[Arrays & Vectors](Tutorials/04-Arrays.txt)**
    - Store collections of data
    - Learn the difference between arrays and vectors
-   - 📖 Quick ref: [Wiki/QUICKREF_Arrays.md](Wiki/QUICKREF_Arrays.md)
-   - 💾 Examples: See `C/p33Array.cpp`, `p35iterarray.cpp`, `p36ArrayToFunction.cpp`
+   - Quick ref: [QUICKREF_Arrays](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_Arrays)
+   - Examples: See `C/p33Array.cpp`, `p35iterarray.cpp`, `p36ArrayToFunction.cpp`
 
-5. **[Pointers & Memory](Tutorials/05-Pointers.txt)** ⚠️ *More Advanced*
+5. **[Pointers & Memory](Tutorials/05-Pointers.txt)** *(More Advanced)*
    - Understand how C++ manages memory
    - Use pointers to modify variables and allocate memory dynamically
-   - 📖 Quick ref: [Wiki/QUICKREF_Pointers.md](Wiki/QUICKREF_Pointers.md)
+   - Quick ref: [QUICKREF_Pointers](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_Pointers)
 
-6. **[Classes & Object-Oriented Programming](Tutorials/06-OOP.txt)** 🎯 *Capstone*
+6. **[Classes & Object-Oriented Programming](Tutorials/06-OOP.txt)** *(Capstone)*
    - Build objects and organize code with classes
    - Understand inheritance and encapsulation
    - Study the **Chess project** as a real-world example
-   - 📖 Quick ref: [Wiki/QUICKREF_OOP.md](Wiki/QUICKREF_OOP.md)
-   - 🔍 Real example: See `Projects/Chess/` for a complete OOP project
+   - Quick ref: [QUICKREF_OOP](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_OOP)
+   - Real example: See `Projects/Chess/` for a complete OOP project
 
 ### Tutorial Features
 
@@ -78,20 +78,20 @@ Each tutorial includes:
 - ✓ References to code in this repo
 - ✓ Links to related wiki quick references
 
-## 📖 Quick Reference Wiki
+## Quick Reference Wiki
 
 Need a quick reminder? Use the Wiki for rapid lookups:
 
-- **[CHEATSHEET.md](Wiki/CHEATSHEET.md)** — Complete reference for all topics with examples
+- **[CHEATSHEET](https://github.com/CCA-Coding-Club/Cplusplus/wiki/CHEATSHEET)** — Complete reference for all topics with examples
 - **Topic Quick References:**
-  - [Data Types](Wiki/QUICKREF_DataTypes.md)
-  - [Control Flow](Wiki/QUICKREF_ControlFlow.md)
-  - [Functions](Wiki/QUICKREF_Functions.md)
-  - [Arrays & Vectors](Wiki/QUICKREF_Arrays.md)
-  - [Pointers & Memory](Wiki/QUICKREF_Pointers.md)
-  - [Classes & OOP](Wiki/QUICKREF_OOP.md)
+  - [Data Types](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_DataTypes)
+  - [Control Flow](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_ControlFlow)
+  - [Functions](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_Functions)
+  - [Arrays & Vectors](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_Arrays)
+  - [Pointers & Memory](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_Pointers)
+  - [Classes & OOP](https://github.com/CCA-Coding-Club/Cplusplus/wiki/QUICKREF_OOP)
 
-## 💾 Code Examples
+## Code Examples
 
 The `/C/` folder contains working code snippets organized by topic:
 
@@ -103,7 +103,7 @@ The `/C/` folder contains working code snippets organized by topic:
 
 Try running these examples and modifying them!
 
-## 🎮 Real Project: Chess
+## Real Project: Chess
 
 Once you've completed the tutorials, explore the **Chess project** in `/Projects/Chess/`:
 
@@ -118,7 +118,7 @@ This is a complete, real-world C++ application demonstrating:
 - Real implementations of OOP principles
 - How classes interact in a complex system
 
-## 📚 Learning Tips
+## Learning Tips
 
 ✓ **Read tutorials end-to-end** — They build on each other  
 ✓ **Type examples yourself** — Don't copy/paste; learn by typing  
@@ -128,7 +128,7 @@ This is a complete, real-world C++ application demonstrating:
 ✓ **Use the wiki** — Quick references are for lookup, not replacement for tutorials  
 ✓ **Build something** — Create your own small project after each topic
 
-## 🤔 Common Questions
+## Common Questions
 
 **Q: What do I need to get started?**  
 A: A C++ compiler (g++, clang, or MSVC) and a text editor. VS Code is recommended. No special libraries needed for tutorials.
@@ -143,7 +143,7 @@ A: No! Understand concepts deeply, keep the wiki open while coding, and practice
 **Q: What after completing these tutorials?**  
 A: Explore the Chess project in detail, build your own game or application, learn advanced topics like templates and STL containers, contribute to open-source projects.
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 After completing this learning path, you will understand:
 
@@ -161,7 +161,7 @@ You'll be ready to:
 - Learn advanced C++ concepts
 - Solve real computational problems
 
-## 📝 Repository Layout
+## Repository Layout
 
 ```
 .
@@ -173,14 +173,6 @@ You'll be ready to:
 │   ├── 04-Arrays.txt
 │   ├── 05-Pointers.txt
 │   └── 06-OOP.txt
-├── Wiki/                        (Quick reference guides)
-│   ├── CHEATSHEET.md
-│   ├── QUICKREF_DataTypes.md
-│   ├── QUICKREF_ControlFlow.md
-│   ├── QUICKREF_Functions.md
-│   ├── QUICKREF_Arrays.md
-│   ├── QUICKREF_Pointers.md
-│   └── QUICKREF_OOP.md
 ├── C/                           (Practice code snippets)
 │   ├── Code snippets.../
 │   └── p1.cpp through p37*
@@ -194,7 +186,9 @@ You'll be ready to:
         └── Chess.cpp
 ```
 
-## 🤝 How to Use This Repository
+> Quick reference guides (cheatsheet and topic references) are in the [repository Wiki](https://github.com/CCA-Coding-Club/Cplusplus/wiki).
+
+## How to Use This Repository
 
 1. **Clone or download** this repository
 2. **Start with [Tutorial 1](Tutorials/01-DataTypes.txt)** and read it completely
@@ -204,7 +198,7 @@ You'll be ready to:
 6. **Move to the next tutorial** when you're comfortable with current concepts
 7. **Study the Chess project** after completing all tutorials
 
-## 🎯 Your Learning Path Checklist
+## Your Learning Path Checklist
 
 - [ ] Tutorial 1: Data Types & Variables (Read & Exercises)
 - [ ] Tutorial 2: Control Flow (Read & Exercises)
@@ -220,4 +214,4 @@ You'll be ready to:
 
 **Ready to start? Open [Tutorials/01-DataTypes.txt](Tutorials/01-DataTypes.txt) and begin your C++ journey!**
 
-Happy coding! 🚀
+Happy coding!
