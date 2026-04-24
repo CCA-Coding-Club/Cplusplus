@@ -1,0 +1,381 @@
+================================================================================
+TUTORIAL 1: DATA TYPES AND VARIABLES
+Learning C++ Basics - Starting from Scratch
+================================================================================
+
+WHAT YOU'LL LEARN:
+- What data types are and why they matter
+- The main primitive data types in C++
+- How to declare and initialize variables
+- Understanding memory and storage
+- Practical examples you can run immediately
+
+================================================================================
+SECTION 1: WHAT IS A DATA TYPE?
+================================================================================
+
+In C++, every piece of data you use must have a TYPE. A data type tells the 
+computer:
+  1. What KIND of data it is (a number? text? true/false?)
+  2. HOW MUCH MEMORY to set aside for it
+  3. WHAT OPERATIONS it supports
+
+Think of it like containers:
+  - A cup holds liquid (not ideal for storing books)
+  - A backpack holds objects (not ideal for holding water)
+  - A hard drive holds files (not ideal for holding a sandwich)
+
+Different data types are optimized for different purposes. Let's explore them.
+
+================================================================================
+SECTION 2: PRIMITIVE DATA TYPES IN C++
+================================================================================
+
+2.1 INTEGER TYPES (Whole Numbers)
+-----------------------------------
+
+int - The most common integer type
+  • Size: Usually 4 bytes (32 bits)
+  • Range: Roughly -2 billion to +2 billion
+  • Use: General purpose whole numbers
+
+Example:
+  int age = 25;
+  int year = 2024;
+  int temperature = -5;
+
+short - Smaller integers, uses less memory
+  • Size: 2 bytes (16 bits)
+  • Range: -32,768 to 32,767
+  • Use: When you know numbers will be small and want to save memory
+
+Example:
+  short score = 100;
+
+long - Larger integers, when int isn't big enough
+  • Size: 4 or 8 bytes (depends on system)
+  • Range: Much larger than int
+  • Use: Very large whole numbers
+
+Example:
+  long population = 8000000000;
+
+long long - The biggest integer type
+  • Size: 8 bytes (64 bits)
+  • Range: -9 quintillion to +9 quintillion
+  • Use: Extremely large numbers
+
+Example:
+  long long astronomicalDistance = 9461000000000000;
+
+
+2.2 FLOATING-POINT TYPES (Decimal Numbers)
+--------------------------------------------
+
+float - Single precision decimal numbers
+  • Size: 4 bytes (32 bits)
+  • Precision: About 6-7 decimal places
+  • Use: When you need decimals but want to save memory
+
+Example:
+  float pi = 3.14159;
+  float height = 5.9;
+  float price = 19.99;
+
+double - Double precision decimal numbers
+  • Size: 8 bytes (64 bits)
+  • Precision: About 15-17 decimal places
+  • Use: When you need accuracy (recommended for most decimal values)
+
+Example:
+  double scientificValue = 2.9979245800;
+  double accountBalance = 1523.47;
+
+IMPORTANT: If you write a decimal number in code, C++ treats it as a DOUBLE 
+by default. Use 'f' suffix for float:
+  float value = 3.14f;  // This is a float
+  double value = 3.14;   // This is a double
+
+
+2.3 CHARACTER TYPE (Single Characters)
+---------------------------------------
+
+char - A single character
+  • Size: 1 byte (8 bits)
+  • Stores: One letter, digit, or symbol
+  • Values: Stored as ASCII codes (numbers representing characters)
+
+Example:
+  char grade = 'A';
+  char initial = 'J';
+  char symbol = '+';
+  char space = ' ';
+
+NOTE: Characters use SINGLE QUOTES ('). Strings (multiple characters) use 
+DOUBLE QUOTES (").
+
+
+2.4 BOOLEAN TYPE (True/False)
+-----------------------------
+
+bool - True or false values
+  • Size: 1 byte
+  • Values: true or false (not 0 or 1, though 0=false, 1=true internally)
+  • Use: Decision making, conditions, flags
+
+Example:
+  bool isRaining = true;
+  bool isWeekend = false;
+  bool hasDriversLicense = true;
+
+
+2.5 STRING TYPE (Text)
+----------------------
+
+string - Multiple characters (a sequence of text)
+  • Part of C++ Standard Library
+  • Can be any length
+  • Use: Names, messages, sentences
+
+Example:
+  string name = "Alice";
+  string greeting = "Hello, World!";
+  string email = "user@example.com";
+
+NOTE: To use string, you must #include <string> at the top of your file.
+
+================================================================================
+SECTION 3: DECLARING AND INITIALIZING VARIABLES
+================================================================================
+
+DECLARATION: Telling C++ you want to create a variable
+FORMAT: 
+  dataType variableName;
+
+Examples:
+  int age;
+  float temperature;
+  string name;
+  bool isLearning;
+
+INITIALIZATION: Giving a variable its first value
+FORMAT:
+  dataType variableName = initialValue;
+
+Examples:
+  int age = 25;
+  float temperature = 98.6;
+  string name = "Sarah";
+  bool isLearning = true;
+
+BEST PRACTICE: Always initialize variables when you declare them. Never use 
+uninitialized variables—they contain garbage values (random data from memory).
+
+DECLARATION + INITIALIZATION IN ONE LINE:
+  int score = 100, level = 5, lives = 3;              // Multiple variables
+  string color = "blue", fruit = "apple";             // Multiple strings
+
+USING A VARIABLE (Reading its value):
+  Once declared and initialized, you can use it:
+  
+  int age = 25;
+  cout << age;           // Prints: 25
+  cout << age + 5;       // Prints: 30
+  int newAge = age + 1;  // newAge becomes 26
+
+CHANGING A VARIABLE (Assignment):
+  int score = 10;
+  cout << score;    // Prints: 10
+  score = 50;       // Change the value
+  cout << score;    // Prints: 50
+
+NOTE: You declare a variable ONCE. After that, you just use its name without 
+the data type:
+  int count = 0;      // Declaration + Initialization
+  count = 5;          // Assignment (no 'int' here!)
+  count = count + 1;  // Using its value
+
+================================================================================
+SECTION 4: UNDERSTANDING MEMORY
+================================================================================
+
+When you declare a variable, C++ reserves space in computer memory. Think of 
+memory as a street with houses:
+
+  Memory Addresses:  1000   1001   1002   1003   1004   1005
+  Houses (bytes):    [??]   [??]   [??]   [??]   [??]   [??]
+
+
+When you declare an int (4 bytes), it takes up 4 houses:
+  
+  int age = 25;
+  
+  Memory:  1000   1001   1002   1003   1004   1005
+           [   25.age  ]     [ Free ] [ Free ]
+           (4 bytes)          (1 byte) (1 byte)
+
+
+Why does this matter?
+  1. Different types use different amounts of memory
+  2. This affects what range of values they can hold
+  3. Choosing the right type makes your program efficient
+
+EXAMPLE SIZES (typical on modern computers):
+  bool:       1 byte
+  char:       1 byte
+  short:      2 bytes
+  int:        4 bytes
+  float:      4 bytes
+  long:       4-8 bytes
+  double:     8 bytes
+  long long:  8 bytes
+  string:     Variable (depends on text length)
+
+CHECK YOUR SYSTEM:
+Use the sizeof() operator to check actual sizes on your computer:
+
+  #include <iostream>
+  using std::cout;
+  
+  int main() {
+    cout << "int size: " << sizeof(int) << " bytes\n";
+    cout << "float size: " << sizeof(float) << " bytes\n";
+    cout << "double size: " << sizeof(double) << " bytes\n";
+    cout << "char size: " << sizeof(char) << " bytes\n";
+    return 0;
+  }
+
+Run this code to see actual memory sizes on your machine.
+
+================================================================================
+SECTION 5: PRACTICAL COMPLETE EXAMPLE
+================================================================================
+
+Here's a complete program using different data types:
+
+  #include <iostream>
+  #include <string>
+  using std::cout;
+  using std::cin;
+  using std::string;
+  
+  int main() {
+    // Declare and initialize variables of different types
+    string name = "Jordan";
+    int age = 20;
+    float gpa = 3.75f;
+    char grade = 'A';
+    bool isFullTime = true;
+    
+    // Display the information
+    cout << "Student Information:\n";
+    cout << "Name: " << name << "\n";
+    cout << "Age: " << age << "\n";
+    cout << "GPA: " << gpa << "\n";
+    cout << "Grade: " << grade << "\n";
+    cout << "Full-time Student: " << isFullTime << "\n";
+    
+    // Do some calculations
+    int yearsUntilGrad = 4;
+    int graduationYear = 2024 + yearsUntilGrad;
+    
+    cout << "\nWill graduate in: " << graduationYear << "\n";
+    
+    return 0;
+  }
+
+OUTPUT:
+  Student Information:
+  Name: Jordan
+  Age: 20
+  GPA: 3.75
+  Grade: A
+  Full-time Student: 1
+  
+  Will graduate in: 2028
+
+================================================================================
+SECTION 6: COMMON MISTAKES TO AVOID
+================================================================================
+
+MISTAKE 1: Using an uninitialized variable
+  int x;              // Declared but NOT initialized
+  cout << x;          // WRONG! x contains garbage data
+  
+  FIX:
+  int x = 0;          // Initialize it first
+  cout << x;          // Correct
+
+MISTAKE 2: Confusing string (multiple chars) with char (single char)
+  char initial = "John";     // WRONG! "John" is a string, need single quotes
+  char initial = 'J';        // Correct
+  
+  string name = 'John';      // WRONG! 'John' tries to be a char
+  string name = "John";      // Correct
+
+MISTAKE 3: Losing precision with float/int division
+  float result = 5 / 2;      // WRONG! 5 and 2 are ints, so 5/2 = 2 (integer division)
+  float result = 5.0 / 2.0;  // Correct, uses floating point division
+  float result = 5.0f / 2;   // Also correct
+
+MISTAKE 4: Declaring variables in the wrong place
+  int age;
+  cout << age;        // This line runs
+  age = 25;           // Initialize after using it? Too late!
+  
+  FIX: Always initialize before using
+  int age = 25;
+  cout << age;        // Correct
+
+================================================================================
+SECTION 7: EXERCISES - PRACTICE YOURSELF
+================================================================================
+
+Now it's your turn! Try these exercises:
+
+EXERCISE 1: Create a Program About Yourself
+  Create a program that declares variables for:
+  - Your name (string)
+  - Your age (int)
+  - Your height in meters (float)
+  - Your favorite letter (char)
+  - Whether you can code (bool)
+  
+  Display all this information when the program runs.
+
+EXERCISE 2: Currency Converter
+  Create a program that:
+  - Stores a US dollar amount in a variable (float)
+  - Converts it to euros (multiply by ~0.92)
+  - Stores the result in another float
+  - Displays both amounts
+
+EXERCISE 3: Temperature Conversion
+  Create a program that:
+  - Stores a temperature in Fahrenheit (float)
+  - Converts it to Celsius using: C = (F - 32) * 5/9
+  - Displays both values
+
+SUGGESTED PRACTICE: Look at these existing code examples in the /C/ folder:
+  - p1.cpp through p5.cpp (basic variable usage)
+  - p9cmath.cpp (using mathematical operations with float/double)
+  - p10hypotenuse.cpp (using float for geometric calculations)
+
+================================================================================
+SECTION 8: KEY TAKEAWAYS
+================================================================================
+
+✓ Data types specify WHAT KIND of data a variable holds
+✓ Integer types (int, short, long): store whole numbers
+✓ Floating-point types (float, double): store decimal numbers
+✓ char: stores single characters
+✓ bool: stores true/false values
+✓ string: stores multiple characters
+✓ Always INITIALIZE variables before using them
+✓ Different types use different amounts of memory
+✓ Use int for numbers, double for decimals, string for text as defaults
+
+NEXT TOPIC: Control Flow (if/else, switch, loops) - Learn how to make 
+decisions in your code!
+
+================================================================================
