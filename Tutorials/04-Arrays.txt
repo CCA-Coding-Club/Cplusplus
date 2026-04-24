@@ -1,0 +1,519 @@
+================================================================================
+TUTORIAL 4: ARRAYS AND VECTORS
+Learning to Store Collections of Data in C++
+================================================================================
+
+WHAT YOU'LL LEARN:
+- What arrays are and why they're useful
+- Declaring and initializing arrays
+- Accessing array elements with indexing
+- Iterating through arrays with loops
+- Understanding array bounds
+- The advantages of vectors over arrays
+- Using vectors in C++
+
+================================================================================
+SECTION 1: INTRODUCTION TO ARRAYS
+================================================================================
+
+An ARRAY is a collection of variables of the SAME TYPE stored next to each 
+other in memory.
+
+WHY USE ARRAYS?
+  1. Store MULTIPLE related values in one variable name
+  2. Access values by POSITION (index)
+  3. Easy to LOOP through all values
+  4. Efficient use of memory
+
+ANALOGY: An array is like a row of mailboxes:
+  - Each box is the same size
+  - Each box has a number (index)
+  - You access boxes by their number
+
+Instead of:
+  int score1 = 85;
+  int score2 = 90;
+  int score3 = 78;
+  int score4 = 92;
+  int score5 = 88;
+
+Use an array:
+  int scores[5] = {85, 90, 78, 92, 88};
+
+Much cleaner!
+
+================================================================================
+SECTION 2: DECLARING AND INITIALIZING ARRAYS
+================================================================================
+
+2.1 ARRAY DECLARATION
+---------------------
+
+FORMAT:
+  dataType arrayName[size];
+
+Examples:
+  int grades[10];          // Array of 10 integers
+  float prices[5];         // Array of 5 floats
+  string names[3];         // Array of 3 strings
+  char letters[26];        // Array of 26 characters
+  bool flags[4];           // Array of 4 booleans
+
+The SIZE (number in brackets) must be a CONSTANT NUMBER (or const variable), 
+not a variable that changes.
+
+IMPORTANT: Once declared, arrays have FIXED SIZE. You can't change it later.
+
+2.2 INITIALIZATION
+------------------
+
+Give array elements values when declaring:
+
+FORMAT:
+  dataType arrayName[size] = {value1, value2, ...};
+
+Examples:
+  int scores[5] = {85, 90, 78, 92, 88};
+  float prices[3] = {9.99, 19.99, 29.99};
+  string colors[3] = {"red", "green", "blue"};
+  char vowels[5] = {'a', 'e', 'i', 'o', 'u'};
+
+INITIALIZATION TRICKS:
+
+Initialize all to zero:
+  int numbers[5] = {};           // All are 0
+  float values[3] = {0};         // All are 0.0
+  string items[4] = {};          // All are empty strings
+
+Partial initialization (rest become 0/empty):
+  int numbers[5] = {1, 2, 3};    // {1, 2, 3, 0, 0}
+
+Auto-size from initializer:
+  int scores[] = {85, 90, 78, 92, 88};  // Size automatically becomes 5
+
+================================================================================
+SECTION 3: ACCESSING ARRAY ELEMENTS
+================================================================================
+
+3.1 INDEXING
+-----------
+
+Access individual elements using SQUARE BRACKETS with an INDEX.
+
+IMPORTANT: Arrays are 0-INDEXED (first element is index 0)
+
+Example with 5-element array:
+  
+  int scores[5] = {85, 90, 78, 92, 88};
+  
+  Index:    0    1    2    3    4
+           [85] [90] [78] [92] [88]
+  
+  scores[0]  → 85 (first element)
+  scores[1]  → 90 (second element)
+  scores[2]  → 78 (third element)
+  scores[3]  → 92 (fourth element)
+  scores[4]  → 88 (fifth element)
+  scores[5]  → ERROR! Out of bounds (doesn't exist)
+
+Example:
+  int numbers[3] = {10, 20, 30};
+  
+  cout << numbers[0] << "\n";  // Prints: 10
+  cout << numbers[1] << "\n";  // Prints: 20
+  cout << numbers[2] << "\n";  // Prints: 30
+  cout << numbers[3] << "\n";  // ERROR! Out of bounds
+
+3.2 MODIFYING ARRAY ELEMENTS
+-----------------------------
+
+Change values at specific indices:
+
+  int scores[3] = {85, 90, 78};
+  
+  cout << scores[0] << "\n";   // Prints: 85
+  
+  scores[0] = 92;              // Change first element
+  
+  cout << scores[0] << "\n";   // Prints: 92
+  
+  scores[2] = scores[2] + 5;   // Add 5 to third element
+  cout << scores[2] << "\n";   // Prints: 83
+
+3.3 INPUT INTO ARRAY ELEMENTS
+------------------------------
+
+Read values from user into array:
+
+  int scores[3];
+  
+  for (int i = 0; i < 3; i++) {
+    cout << "Enter score " << (i+1) << ": ";
+    cin >> scores[i];
+  }
+  
+  for (int i = 0; i < 3; i++) {
+    cout << "Score " << (i+1) << ": " << scores[i] << "\n";
+  }
+
+================================================================================
+SECTION 4: ITERATING THROUGH ARRAYS WITH LOOPS
+================================================================================
+
+Usually, you access ALL array elements using a loop.
+
+4.1 FOR LOOP ITERATION
+----------------------
+
+Most common way - use the index:
+
+  int scores[5] = {85, 90, 78, 92, 88};
+  
+  for (int i = 0; i < 5; i++) {
+    cout << scores[i] << " ";
+  }
+  
+  OUTPUT: 85 90 78 92 88
+
+The pattern:
+  i starts at 0
+  i < 5 (loop while i is less than array size)
+  i++ (increase i each time)
+
+Real example (finding average):
+
+  int scores[4] = {85, 90, 78, 92};
+  int sum = 0;
+  
+  for (int i = 0; i < 4; i++) {
+    sum += scores[i];
+  }
+  
+  double average = sum / 4;
+  cout << "Average: " << average << "\n";
+
+Real example (finding maximum):
+
+  int scores[5] = {85, 90, 76, 92, 88};
+  int max = scores[0];               // Start with first element
+  
+  for (int i = 1; i < 5; i++) {      // Start from index 1
+    if (scores[i] > max) {
+      max = scores[i];
+    }
+  }
+  
+  cout << "Highest score: " << max << "\n";
+
+4.2 USING size() WITH ARRAYS
+------------------------------
+
+For arrays (not vectors), you need to track the size separately:
+
+  int scores[5] = {85, 90, 78, 92, 88};
+  int size = 5;
+  
+  for (int i = 0; i < size; i++) {
+    cout << scores[i] << " ";
+  }
+
+OR use sizeof() trick (gets memory size):
+
+  int scores[] = {85, 90, 78, 92, 88};
+  int size = sizeof(scores) / sizeof(scores[0]);  // Number of elements
+  
+  for (int i = 0; i < size; i++) {
+    cout << scores[i] << " ";
+  }
+
+================================================================================
+SECTION 5: ARRAYS AND FUNCTIONS
+================================================================================
+
+Pass arrays to functions:
+
+5.1 PASSING ARRAYS TO FUNCTIONS
+--------------------------------
+
+FORMAT:
+  void functionName(dataType arrayName[]) {
+    // arrayName is the array parameter
+  }
+
+Example (Print array):
+
+  void printArray(int arr[]) {
+    for (int i = 0; i < 5; i++) {
+      cout << arr[i] << " ";
+    }
+    cout << "\n";
+  }
+  
+  int main() {
+    int scores[5] = {85, 90, 78, 92, 88};
+    printArray(scores);  // Pass array to function
+    return 0;
+  }
+  
+  OUTPUT: 85 90 78 92 88
+
+IMPORTANT: When passing an array, the function needs to KNOW the size. Pass 
+it as a separate parameter:
+
+  void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+      cout << arr[i] << " ";
+    }
+    cout << "\n";
+  }
+  
+  int main() {
+    int scores[] = {85, 90, 78, 92, 88};
+    int size = 5;
+    printArray(scores, size);
+    return 0;
+  }
+
+5.2 MODIFYING ARRAYS IN FUNCTIONS
+----------------------------------
+
+When you pass an array to a function, changes AFFECT THE ORIGINAL array:
+
+  void addTenToAll(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+      arr[i] += 10;  // Change original array
+    }
+  }
+  
+  int main() {
+    int scores[3] = {80, 85, 90};
+    addTenToAll(scores, 3);
+    
+    cout << scores[0] << "\n";  // Prints: 90 (changed!)
+    return 0;
+  }
+
+================================================================================
+SECTION 6: INTRODUCTION TO VECTORS
+================================================================================
+
+A VECTOR is like an array, but it can GROW and SHRINK dynamically.
+
+WHY USE VECTORS?
+  1. Size can change (arrays can't)
+  2. Automatically handles memory
+  3. Built-in size() function
+  4. Easier and safer than arrays
+
+6.1 DECLARING VECTORS
+---------------------
+
+FORMAT:
+  vector<dataType> vectorName;
+
+Examples:
+  vector<int> scores;          // Empty vector of integers
+  vector<float> prices;        // Empty vector of floats
+  vector<string> names;        // Empty vector of strings
+  vector<bool> flags;          // Empty vector of booleans
+
+IMPORTANT: To use vector, you must include:
+  #include <vector>
+  using std::vector;
+
+6.2 INITIALIZING VECTORS
+------------------------
+
+Initialize with values:
+  vector<int> scores = {85, 90, 78, 92, 88};
+  vector<string> colors = {"red", "green", "blue"};
+
+Initialize with specific size and default value:
+  vector<int> scores(5);       // Size 5, all zeros
+  vector<int> scores(5, 0);    // Size 5, all zeros (explicit)
+  vector<string> names(3, "Unknown");  // Size 3, all "Unknown"
+
+6.3 ADDING ELEMENTS TO VECTORS
+-------------------------------
+
+Use push_back() to add to the end:
+
+  vector<int> scores;
+  
+  scores.push_back(85);   // scores is now {85}
+  scores.push_back(90);   // scores is now {85, 90}
+  scores.push_back(78);   // scores is now {85, 90, 78}
+  
+  cout << scores[0] << "\n";  // Prints: 85
+
+6.4 ACCESSING VECTOR ELEMENTS
+------------------------------
+
+Use [] like arrays:
+
+  vector<int> scores = {85, 90, 78, 92};
+  
+  cout << scores[0] << "\n";   // Prints: 85
+  cout << scores[3] << "\n";   // Prints: 92
+  
+  scores[1] = 95;              // Change element
+  cout << scores[1] << "\n";   // Prints: 95
+
+6.5 VECTOR SIZE
+---------------
+
+Get vector size with size() function:
+
+  vector<int> scores = {85, 90, 78, 92, 88};
+  
+  cout << scores.size() << "\n";  // Prints: 5
+
+Loop through with size():
+
+  for (int i = 0; i < scores.size(); i++) {
+    cout << scores[i] << " ";
+  }
+
+6.6 REMOVING ELEMENTS
+---------------------
+
+Remove last element with pop_back():
+
+  vector<int> scores = {85, 90, 78};
+  
+  scores.pop_back();    // Remove last element (78)
+  
+  cout << scores.size() << "\n";  // Prints: 2
+  cout << scores[0] << "\n";      // Prints: 85
+  cout << scores[1] << "\n";      // Prints: 90
+
+================================================================================
+SECTION 7: ARRAY VS VECTOR COMPARISON
+================================================================================
+
+ARRAYS:
+  ✓ Fixed size (decided at compile time)
+  ✓ Slightly faster
+  ✓ Simple for small, known-size collections
+  ✗ Can't grow or shrink
+  ✗ Have to track size manually
+
+VECTORS:
+  ✓ Dynamic size (can grow/shrink at runtime)
+  ✓ Has built-in size() function
+  ✓ Memory handled automatically
+  ✓ Same syntax as arrays (mostly)
+  ✗ Tiny bit slower than arrays (usually doesn't matter)
+
+RECOMMENDATION:
+Use VECTORS by default for most situations. Use arrays only when you have 
+very specific performance needs or fixed-size requirements.
+
+================================================================================
+SECTION 8: PRACTICAL COMPLETE EXAMPLE
+================================================================================
+
+A complete program using vectors:
+
+  #include <iostream>
+  #include <vector>
+  using std::cout;
+  using std::cin;
+  using std::vector;
+  
+  void printScores(vector<int> scores) {
+    cout << "Scores: ";
+    for (int i = 0; i < scores.size(); i++) {
+      cout << scores[i] << " ";
+    }
+    cout << "\n";
+  }
+  
+  double calculateAverage(vector<int> scores) {
+    int sum = 0;
+    for (int score : scores) {
+      sum += score;
+    }
+    return (double) sum / scores.size();
+  }
+  
+  int main() {
+    vector<int> scores;
+    
+    cout << "Enter test scores (enter -1 to stop):\n";
+    int score;
+    while (true) {
+      cin >> score;
+      if (score == -1) break;
+      scores.push_back(score);
+    }
+    
+    if (scores.size() > 0) {
+      printScores(scores);
+      cout << "Average: " << calculateAverage(scores) << "\n";
+    }
+    
+    return 0;
+  }
+
+(Note: `for (int score : scores)` is a range-based for loop - loops through 
+each element)
+
+================================================================================
+SECTION 9: EXERCISES - PRACTICE YOURSELF
+================================================================================
+
+EXERCISE 1: Array Statistics
+  Create a program that:
+  - Has an array of 5 numbers
+  - Finds and prints the minimum and maximum values
+  - Calculates the sum and average
+
+EXERCISE 2: Vector Input
+  Create a program that:
+  - Uses a vector to store user-entered numbers
+  - User enters numbers until they type -1
+  - Prints all numbers, then counts how many were entered
+
+EXERCISE 3: Search in Vector
+  Create a function that:
+  - Takes a vector and a search value
+  - Returns true if the value exists in vector, false otherwise
+  - Test it with different vectors
+
+EXERCISE 4: Reverse Array
+  Create a function that:
+  - Takes an array and its size
+  - Stores array elements in reverse order in a new array
+  - Return or display the reversed array
+
+EXERCISE 5: Remove Duplicates
+  Create a program that:
+  - Takes a vector of integers
+  - Creates a new vector with duplicate values removed
+  - Displays both vectors
+
+SUGGESTED PRACTICE: Look at these code examples in the /C/ folder:
+  - p33Array.cpp (array basics)
+  - p34sizeof.cpp (array size)
+  - p35iterarray.cpp (iterating arrays)
+  - p36ArrayToFunction.cpp (arrays as function parameters)
+  - p37searchArray.cpp (searching in arrays)
+
+================================================================================
+SECTION 10: KEY TAKEAWAYS
+================================================================================
+
+✓ Arrays store multiple values of the same type
+✓ Arrays are 0-indexed (first element is index 0)
+✓ Loop through arrays with for loops
+✓ Arrays have fixed size; can't change size after declaration
+✓ Pass arrays to functions with the array name and size
+✓ Vectors are dynamic arrays that can grow/shrink
+✓ Use push_back() to add elements to a vector
+✓ Use size() to get the number of elements in a vector
+✓ Use vectors for most situations; arrays for special cases
+
+NEXT TOPIC: Pointers and Memory - Understand how C++ manages computer memory!
+
+================================================================================
