@@ -1,8 +1,8 @@
 #include <iostream>
 //#include <ctime>
 
-//for terminal commands system("etc.")
 //#include <cstdlib>
+//for terminal commands example: std::system("clear")
 
 //#include <iomanip>
 //relevant functions: std::cin.clear(); fflush(stdin);
