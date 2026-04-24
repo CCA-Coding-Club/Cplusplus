@@ -1,31 +1,9 @@
+#include <ostream>
 #include <stdlib.h>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 
-
-auto yon = 'b';
-int yloop() {
-  for(int i = 0; i < 100; i++) {
-    std::cin >> yon;
-    if(yon == 'y' || yon == 'n') {
-      break;
-    }
-  }
-  return 1;
-}
-
-// int main() {
-//  std::string test = "Why aren't you Coding?\n";
-//  std::cout << test;
-//  yloop();
-//  if(yn == 'I am!') {
-//    std::cout << "Good choice. \n" << "The future will rely on the tech-makers.\n";
-//    int pchoice = 0;
-//    std::cin >> pchoice;
-//    if(pchoice == 1) {
-//      std::cout << "The apple appears in your hand. it seems to flash in and out of existence. The screen just in front of the merchants eyes flashes for roughly 15 seconds before he says. Thank you for your purchase. He fades from your presence\n";
-//    }}}
 
 //rock beats scissors
 //rock beats lizard
@@ -94,4 +72,5 @@ int main(){
   } else if (u == c) {
     std::cout << "An epic battle takes place but because of my poor variable assignment we won't only you know what is fighting what. either way, Tie. Try again.";
   }
+  std::cout << std::endl;
 }
